@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+    xmlhttp = new XMLHttpRequest();
+
+    function getData(){
+        if(xmlhttp) {
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4 ) {
+                    if (xmlhttp.status == 200) { 
+                        var myObj =JSON.parse(xmlhttp.responseText);
+                        alert( xmlhttp.responseText);
+                        var i;
+                        for (i = 0; i < myObj.length; i++) {
+                            alert( myObj[i].nome);
+                        }
+                    }
+                    else {
+                        if (xmlhttp.status == 401)
+                            alert("401: unauthorized" + xmlhttp.responseText);
+                    }
+                }
+            }
+            xmlhttp.open("POST", "https://compact-digit-273112.appspot.com/rest/login", true);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+            xmlhttp.send("username");
+        }
+    }
+</script>
+</head>
+<body>
+<H1>Fetching response as JSON from server with AJAX</H1>
+<FORM NAME="form1">
+<br/><INPUT TYPE="button" Value="Fetch Data" onClick='getData()'> </FORM>
+</body>
+</html>
